@@ -50,8 +50,8 @@ function parseHours(str) {
   DAYS.forEach(x => {
     let short = DAYS_SHORT[x]
     let location = todayStr.search(short)
-
-    if (location < firstDayLocation) {
+    
+    if (location !== -1 && location < firstDayLocation) {
       firstDayLocation = location
       firstDayFound = short
     }
