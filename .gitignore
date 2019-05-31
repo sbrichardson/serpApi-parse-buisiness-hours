@@ -1,0 +1,31 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# tmp files from scripts
+.commit_tmp
+
+# dependencies
+/node_modules
+/dist
+
+# production
+/build
+# misc
+.DS_Store
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test.local
+.env.production.local
+.env.production.bak
+
+# .env.production
+
+.flowconfig
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+_dev/kube_secrets_v1.yaml
+
+public/media/jazz
+
