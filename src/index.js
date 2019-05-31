@@ -1,4 +1,3 @@
-import parseHours from './parseHours'
-require('./parseHours_dev')
+export { default } from './parseHours'
 
-export default parseHours
+process.env.NODE_ENV === 'development' && require('./parseHours_dev')
