@@ -21,15 +21,12 @@ const SUGGEST_EDIT = 'Suggest an edit'
  */
 function parseHours(str) {
   let parts = str.split(DOT1)
-  let status
   let todayHours
   let hours
 
   if (parts.length < 2) return {}
 
-  let [_status, ..._restToday] = parts
-
-  status = _status
+  let [status, ..._restToday] = parts
 
   let restToday
   let openParts
