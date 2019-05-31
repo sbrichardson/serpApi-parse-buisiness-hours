@@ -1,11 +1,22 @@
 {
-  "name": "serpApi_parse_business_hours",
+  "name": "@reactual/parse-business-hours",
   "version": "1.0.0",
+  "author": "Reactual <github@reactual.io> (https://www.github.com/reactual)",
+  "contributors": [
+    {
+      "name": "Stephen Richardson",
+      "url": "https://www.github.com/sbrichardson"
+    }
+  ],
+  "private": false,
+  "description": "Parses business hours from the Google Knowledge Graph API provided by SerpAPI.",
   "main": "build/index.js",
   "license": "MIT",
   "scripts": {
+    "clean": "rimraf build",
     "dev": "NODE_ENV=development nodemon -q",
-    "build-dev": "BABEL_ENV=development babel -d build/ src/ --extensions \".js\" --quiet --source-maps inline"
+    "build": "BABEL_ENV=production babel -d build/ src/ --quiet --compact=true --no-comments",
+    "build:dev": "BABEL_ENV=development babel -d build/ src/ --extensions \".js\" --quiet --source-maps inline"
   },
   "nodemonConfig": {
     "watch": [
@@ -13,9 +24,9 @@
     ],
     "ext": "js",
     "ignore": [
-      "src/**/*.spec.ts"
+      "src/**/*.spec.js"
     ],
-    "exec": "yarn build-dev && clear && node build/index.js"
+    "exec": "yarn build:dev && clear && node build/index.js"
   },
   "dependencies": {
     "lodash": "^4.17.11"
@@ -27,8 +38,9 @@
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-syntax-object-rest-spread": "^6.13.0",
-    "babel-plugin-transform-remove-console": "^6.9.4",
+    "babel-preset-minify": "^0.5.0",
     "nodemon": "^1.19.0",
-    "prettier": "^1.17.1"
+    "prettier": "^1.17.1",
+    "rimraf": "^2.6.3"
   }
 }
