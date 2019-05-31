@@ -25,53 +25,53 @@ function parseHours(str) {
   let todayHours
   let hours
 
-  if (parts.length > 1) {
-    let [_status, ..._restToday] = parts
+  if (parts.length < 2) return {}
 
-    status = _status
+  let [_status, ..._restToday] = parts
 
-    let restToday
-    let openParts
-    let isOpen = trim(status.toLowerCase()) === 'open'
+  status = _status
 
-    if (isOpen) {
-      if (parts.length > 2) {
-        openParts = parts[1]
-        restToday = parts[2]
-      } else {
-        let [_openParts, ..._openRest] = parts[1].split(DOT2)
-        openParts = _openParts
-        restToday = _openRest.join('')
-      }
+  let restToday
+  let openParts
+  let isOpen = trim(status.toLowerCase()) === 'open'
+
+  if (isOpen) {
+    if (parts.length > 2) {
+      openParts = parts[1]
+      restToday = parts[2]
+    } else {
+      let [_openParts, ..._openRest] = parts[1].split(DOT2)
+      openParts = _openParts
+      restToday = _openRest.join('')
     }
+  }
 
-    let todayStr = _restToday.join('')
-    let firstDayLocation = todayStr.length
-    let firstDayFound
+  let todayStr = _restToday.join('')
+  let firstDayLocation = todayStr.length
+  let firstDayFound
 
-    DAYS.forEach(x => {
-      let short = DAYS_SHORT[x]
-      let location = todayStr.search(short)
+  DAYS.forEach(x => {
+    let short = DAYS_SHORT[x]
+    let location = todayStr.search(short)
 
-      if (location < firstDayLocation) {
-        firstDayLocation = location
-        firstDayFound = short
-      }
-    })
-
-    todayHours = isOpen
-      ? openParts
-      : todayStr.slice(0, firstDayLocation + firstDayFound.length)
-
-    let restHours = isOpen
-      ? restToday
-      : todayStr.slice(firstDayLocation + firstDayFound.length)
-
-    let hourParts = restHours.split(SUGGEST_EDIT)
-
-    if (hourParts.length) {
-      hours = splitHours(hourParts[0])
+    if (location < firstDayLocation) {
+      firstDayLocation = location
+      firstDayFound = short
     }
+  })
+
+  todayHours = isOpen
+    ? openParts
+    : todayStr.slice(0, firstDayLocation + firstDayFound.length)
+
+  let restHours = isOpen
+    ? restToday
+    : todayStr.slice(firstDayLocation + firstDayFound.length)
+
+  let hourParts = restHours.split(SUGGEST_EDIT)
+
+  if (hourParts.length) {
+    hours = splitHours(hourParts[0])
   }
 
   return { hours, status, todayHours }
