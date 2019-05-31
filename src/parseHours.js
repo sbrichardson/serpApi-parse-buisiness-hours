@@ -1,7 +1,8 @@
 import { DAYS, DAYS_SHORT } from './_constants'
 import splitHours from './splitHours'
 import trim from 'lodash/trim'
-import getDay from './getDay'
+
+// import getDay from './getDay'
 
 /**
  * NOTE
@@ -25,7 +26,7 @@ function parseHours(str) {
   let todayHours
   let hourStr
   let hourResult
-  let dayObj = getDay()
+  // let dayObj = getDay() // not used
 
   if (parts.length > 1) {
     let [_status, ..._restToday] = parts
@@ -48,8 +49,8 @@ function parseHours(str) {
     }
 
     let todayStr = _restToday.join('')
-    let firstDayFound
     let firstDayLocation = todayStr.length
+    let firstDayFound
 
     DAYS.forEach(x => {
       let short = DAYS_SHORT[x]

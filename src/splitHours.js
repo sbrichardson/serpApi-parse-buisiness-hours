@@ -28,7 +28,6 @@ function splitHours(hourStr) {
   )
 
   let sections = []
-  let sectionsFormatted = []
   let lastIndex = sortedLocations.length - 1
 
   /* TODO Check/Handle case if multiple ranges/shifts in single day, dupe day names */
@@ -75,6 +74,7 @@ function splitHours(hourStr) {
     /* Separating AM/PM info */
     let fromType = from.slice(-2)
     let fromTime = from.slice(0, -2)
+
     let toType = to.slice(-2)
     let toTime = to.slice(0, -2)
 
@@ -86,19 +86,17 @@ function splitHours(hourStr) {
     from = `${fromTime} ${fromType}`
     to = `${toTime} ${toType}`
 
-    /* Save separated info in case needed, to avoid parsing again */
-    let details = {
-      from: fromTime,
-      from_type: fromType,
-      to: toTime,
-      to_type: toType,
-    }
-
     sections.push({
       day: day,
       opens_at: from,
       closes_at: to,
-      details,
+      /* Save separated info in case needed, to avoid parsing again */
+      details: {
+        from: fromTime,
+        from_type: fromType,
+        to: toTime,
+        to_type: toType,
+      },
     })
   })
 
