@@ -23,8 +23,7 @@ function parseHours(str) {
   let parts = str.split(DOT1)
   let status
   let todayHours
-  let hourStr
-  let hourResult
+  let hours
 
   if (parts.length > 1) {
     let [_status, ..._restToday] = parts
@@ -71,14 +70,11 @@ function parseHours(str) {
     let hourParts = restHours.split(SUGGEST_EDIT)
 
     if (hourParts.length) {
-      let [_hourStr, ...details] = hourParts
-
-      hourStr = _hourStr
-      hourResult = splitHours(hourStr)
+      hours = splitHours(hourParts[0])
     }
   }
 
-  return { hours: hourResult, status, todayHours }
+  return { hours, status, todayHours }
 }
 
 export default parseHours
