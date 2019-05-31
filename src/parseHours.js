@@ -2,8 +2,6 @@ import { DAYS, DAYS_SHORT } from './_constants'
 import splitHours from './splitHours'
 import trim from 'lodash/trim'
 
-// import getDay from './getDay'
-
 /**
  * NOTE
  * Google knowledge graph business info parsing. (serpApi)
@@ -11,6 +9,7 @@ import trim from 'lodash/trim'
  * TODO
  * 1. Check if consistent
  * 2. Review, the dot characters appear the same, but are different
+ * 3. Not using getDay() fn.
  */
 const DOT1 = ' ⋅ '
 const DOT2 = ' · See more hours'
@@ -26,7 +25,6 @@ function parseHours(str) {
   let todayHours
   let hourStr
   let hourResult
-  // let dayObj = getDay() // not used
 
   if (parts.length > 1) {
     let [_status, ..._restToday] = parts
