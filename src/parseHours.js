@@ -1,6 +1,7 @@
 import { DAYS, DAYS_SHORT } from './_constants'
 import splitHours from './splitHours'
 import trim from 'lodash/trim'
+import c from '@reactual/c'
 
 /**
  * NOTE
@@ -22,7 +23,6 @@ const SUGGEST_EDIT = 'Suggest an edit'
 function parseHours(str) {
   let parts = str.split(DOT1)
   let todayHours
-  let hours
 
   if (parts.length < 2) return {}
 
@@ -40,38 +40,63 @@ function parseHours(str) {
       let [_openParts, ..._openRest] = parts[1].split(DOT2)
       openParts = _openParts
       restToday = _openRest.join('')
+
+      /* Split on DOT2 failed, look for first day */
+      if (!restToday) {
+        let res = getFirstDayInfo(openParts)
+        restToday = openParts.slice(res.dayLocation)
+        openParts = openParts.slice(0, res.dayLocation)
+      }
     }
   }
 
   let todayStr = _restToday.join('')
-  let firstDayLocation = todayStr.length
-  let firstDayFound
+  let res = getFirstDayInfo(todayStr)
+  let firstDayLocation = res.dayLocation
+  let firstDayFound = res.dayName
+  let restHours
 
-  DAYS.forEach(x => {
-    let short = DAYS_SHORT[x]
-    let location = todayStr.search(short)
-    
-    if (location !== -1 && location < firstDayLocation) {
-      firstDayLocation = location
-      firstDayFound = short
-    }
-  })
-
-  todayHours = isOpen
-    ? openParts
-    : todayStr.slice(0, firstDayLocation + firstDayFound.length)
-
-  let restHours = isOpen
-    ? restToday
-    : todayStr.slice(firstDayLocation + firstDayFound.length)
+  if (isOpen) {
+    todayHours = openParts
+    restHours = restToday
+  } else {
+    todayHours = todayStr.slice(0, firstDayLocation + firstDayFound.length)
+    restHours = todayStr.slice(firstDayLocation + firstDayFound.length)
+  }
 
   let hourParts = restHours.split(SUGGEST_EDIT)
 
-  if (hourParts.length) {
-    hours = splitHours(hourParts[0])
+  return {
+    hours: hourParts.length ? splitHours(hourParts[0]) : null,
+    status,
+    todayHours,
   }
-
-  return { hours, status, todayHours }
 }
 
 export default parseHours
+
+/**
+ * Finds the lowest index (first day) in a string
+ * out of a list of 7 days/abbrev day names.
+ */
+function getFirstDayInfo(str, len) {
+  let dayLocation = len || str.length
+  let dayName
+
+  DAYS.forEach(x => {
+    /* Check for full day name, then abbrev name if not found */
+    let day = x
+    let location = str.search(day)
+    if (location === -1) {
+      day = DAYS_SHORT[x]
+      location = str.search(day)
+    }
+    if (location === -1) return
+    if (location < dayLocation) {
+      dayLocation = location
+      dayName = day
+    }
+  })
+
+  return { dayName, dayLocation }
+}

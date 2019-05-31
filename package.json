@@ -18,6 +18,7 @@
     "exec": "yarn build-dev && clear && node build/index.js"
   },
   "dependencies": {
+    "@reactual/c": "^0.1.3",
     "lodash": "^4.17.11"
   },
   "devDependencies": {
