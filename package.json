@@ -2,5 +2,8 @@
   "name": "serpApi_parse_business_hours",
   "version": "1.0.0",
   "main": "src/index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.11"
+  }
 }
