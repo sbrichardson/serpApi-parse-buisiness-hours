@@ -1,9 +1,34 @@
 {
   "name": "serpApi_parse_business_hours",
   "version": "1.0.0",
-  "main": "src/index.js",
+  "main": "build/index.js",
   "license": "MIT",
+  "scripts": {
+    "dev": "NODE_ENV=development nodemon -q",
+    "build-dev": "BABEL_ENV=development babel -d build/ src/ --extensions \".js\" --quiet --source-maps inline"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src"
+    ],
+    "ext": "js",
+    "ignore": [
+      "src/**/*.spec.ts"
+    ],
+    "exec": "yarn build-dev && clear && node build/index.js"
+  },
   "dependencies": {
     "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "babel-plugin-lodash": "^3.3.4",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-syntax-object-rest-spread": "^6.13.0",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "nodemon": "^1.19.0",
+    "prettier": "^1.17.1"
   }
 }

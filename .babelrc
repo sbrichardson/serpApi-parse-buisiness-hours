@@ -1,0 +1,64 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "loose": true
+      }
+    ]
+  ],
+  "env": {
+    "development": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "targets": {
+              "node": "current"
+            }
+          }
+        ]
+      ],
+      "plugins": [
+        "lodash",
+        "syntax-dynamic-import",
+        "@babel/plugin-syntax-object-rest-spread"
+      ]
+    },
+    "test": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "loose": true,
+            "targets": {
+              "node": "current"
+            }
+          }
+        ]
+      ],
+      "plugins": [
+        "lodash",
+        "syntax-dynamic-import",
+        "@babel/plugin-syntax-object-rest-spread"
+      ]
+    },
+    "production": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "targets": {
+              "node": "current"
+            }
+          }
+        ]
+      ],
+      "plugins": [
+        "lodash",
+        "syntax-dynamic-import",
+        "@babel/plugin-syntax-object-rest-spread"
+      ]
+    }
+  }
+}
