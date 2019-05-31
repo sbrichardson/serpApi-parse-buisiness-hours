@@ -1,7 +1,6 @@
 import { DAYS, DAYS_SHORT } from './_constants'
 import splitHours from './splitHours'
 import trim from 'lodash/trim'
-import c from '@reactual/c'
 
 /**
  * NOTE
@@ -10,7 +9,6 @@ import c from '@reactual/c'
  * TODO
  * 1. Check if consistent
  * 2. Review, the dot characters appear the same, but are different
- * 3. Not using getDay() fn.
  */
 const DOT1 = ' ⋅ '
 const DOT2 = ' · See more hours'
@@ -26,10 +24,9 @@ function parseHours(str) {
   if (parts.length < 2) return {}
 
   let [status, ..._restToday] = parts
-
+  let isOpen = trim(status.toLowerCase()) === 'open'
   let restToday
   let openParts
-  let isOpen = trim(status.toLowerCase()) === 'open'
 
   if (isOpen) {
     if (parts.length > 2) {
@@ -42,9 +39,9 @@ function parseHours(str) {
 
       /* Split on DOT2 failed, look for first day */
       if (!restToday) {
-        let res = getFirstDayInfo(openParts)
-        restToday = openParts.slice(res.dayLocation)
-        openParts = openParts.slice(0, res.dayLocation)
+        let { dayLocation } = getFirstDayInfo(openParts)
+        restToday = openParts.slice(dayLocation)
+        openParts = openParts.slice(0, dayLocation)
       }
     }
   }

@@ -1,6 +1,5 @@
 import { DAYS } from './_constants'
 import trim from 'lodash/trim'
-import c from '@reactual/c'
 
 /**
  * After hours are reduced to a single string group,
