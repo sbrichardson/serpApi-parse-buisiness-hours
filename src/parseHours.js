@@ -22,7 +22,6 @@ const SUGGEST_EDIT = 'Suggest an edit'
  */
 function parseHours(str) {
   let parts = str.split(DOT1)
-  let todayHours
 
   if (parts.length < 2) return {}
 
@@ -50,26 +49,25 @@ function parseHours(str) {
     }
   }
 
-  let todayStr = _restToday.join('')
-  let res = getFirstDayInfo(todayStr)
-  let firstDayLocation = res.dayLocation
-  let firstDayFound = res.dayName
+  let todayHours
   let restHours
 
   if (isOpen) {
     todayHours = openParts
     restHours = restToday
   } else {
-    todayHours = todayStr.slice(0, firstDayLocation + firstDayFound.length)
-    restHours = todayStr.slice(firstDayLocation + firstDayFound.length)
+    let todayStr = _restToday.join('')
+    let { dayLocation, dayName } = getFirstDayInfo(todayStr)
+    todayHours = todayStr.slice(0, dayLocation + dayName.length)
+    restHours = todayStr.slice(dayLocation + dayName.length)
   }
 
   let hourParts = restHours.split(SUGGEST_EDIT)
 
   return {
-    hours: hourParts.length ? splitHours(hourParts[0]) : null,
     status,
     todayHours,
+    hours: hourParts.length ? splitHours(hourParts[0]) : null,
   }
 }
 
