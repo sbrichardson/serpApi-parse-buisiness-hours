@@ -16,7 +16,7 @@ const DOT2 = ' · See more hours'
 const SUGGEST_EDIT = 'Suggest an edit'
 
 /**
- * Accepts a Google knowledge graph (raw) hours string, scraped from serApi
+ * Accepts a Google knowledge graph (raw) hours string, scraped from serpApi
  * Returns the hours, status, details, as an object.
  */
 function parseHours(str) {
