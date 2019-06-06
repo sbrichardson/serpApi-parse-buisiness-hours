@@ -14,6 +14,9 @@ const SAMPLES = [
   'Open ⋅ Closes 12AMFriday9AM–12AMSaturday9AM–12AMSunday9AM–12AMMonday9AM–12AMTuesday9AM–12AMWednesday9AM–12AMThursday9AM–12AMSuggest an editUnable to add this file. Please check that it is a valid photo.',
 
   'Open ⋅ Closes 11PM · See more hoursFriday6AM–11PMSaturday6AM–11PMSunday6AM–11PMMonday6AM–11PMTuesday6AM–11PMWednesday6AM–11PMThursday6AM–11PMSuggest an editUnable to add this file. Please check that it is a valid photo.',
+
+  // old major denver // TODO Fix Opens 11AMThursday issue, missed
+  'Closed ⋅ Opens 11AMThursday11AM–10PMFriday11AM–10PMSaturday9 - 30AM–10PMSunday9 - 30AM–2PMMondayClosedTuesdayClosedWednesday11AM–10PMSuggest an editUnable to add this file. Please check that it is a valid photo.',
 ]
 
 SAMPLES.forEach(x => {
