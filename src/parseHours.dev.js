@@ -15,8 +15,11 @@ const SAMPLES = [
 
   'Open ⋅ Closes 11PM · See more hoursFriday6AM–11PMSaturday6AM–11PMSunday6AM–11PMMonday6AM–11PMTuesday6AM–11PMWednesday6AM–11PMThursday6AM–11PMSuggest an editUnable to add this file. Please check that it is a valid photo.',
 
-  // old major denver // TODO Fix Opens 11AMThursday issue, missed
+  // old major denver // BUG Fix Opens 11AMThursday issue, missed
   'Closed ⋅ Opens 11AMThursday11AM–10PMFriday11AM–10PMSaturday9 - 30AM–10PMSunday9 - 30AM–2PMMondayClosedTuesdayClosedWednesday11AM–10PMSuggest an editUnable to add this file. Please check that it is a valid photo.',
+
+  // BUG Result combines 8AMMon, skips Sunda closed in result
+  'Closed ⋅ Opens 8AM MonSundayClosedMonday8AM–5PMTuesday8AM–5PMWednesday8AM–5PMThursday8AM–5PMFriday8AM–5PMSaturdayClosedSuggest an editUnable to add this file. Please check that it is a valid photo.',
 ]
 
 SAMPLES.forEach(x => {
