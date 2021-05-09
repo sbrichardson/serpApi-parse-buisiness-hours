@@ -29,7 +29,7 @@
     "exec": "yarn build:dev && clear && node build/index.js"
   },
   "dependencies": {
-    "lodash": "^4.17.13"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
